@@ -66,13 +66,17 @@ jobs:
                   "test_plan": "Testing if the software was successfully deployed"
               }
           }
-          interval: '100'
-          timeout: '3600'
-          changeCreationTimeOut: '3600'
-          abortOnChangeCreationFailure: true
-          abortOnChangeStepTimeout: true
+         # Deduct indentation so these properties align directly under "with:"
+        interval: '100'
+        timeout: '3600'
+        changeCreationTimeOut: '3600'
+        abortOnChangeCreationFailure: true
+        abortOnChangeStepTimeout: true
     - name: Output of Change Creation
-      run: echo "change-request-number = ${{ steps.create.outputs.change-request-number }} and change-request-sys-id = ${{ steps.create.outputs.change-request-sys-id }} " >> $GITHUB_OUTPUT
+      run: |
+        echo "Successfully tracked change request!"
+        echo "Ticket Number: ${{ steps.create.outputs.change-request-number }}"
+        echo "Sys ID: ${{ steps.create.outputs.change-request-sys-id }}"ber }} and change-request-sys-id = ${{ steps.create.outputs.change-request-sys-id }} "
 
   # STAGE 5: PRODUCTION DEPLOYMENT
   DeployToProduction:
