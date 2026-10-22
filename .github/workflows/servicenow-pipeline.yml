@@ -53,7 +53,7 @@ jobs:
         tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
         
         # Details sent directly to ServiceNow to auto-populate the Change Ticket
-        change-request: |
+        change-request-details: |
           {
             "attributes": {
               "short_description": "Automated deployment demo via GitHub Actions",
