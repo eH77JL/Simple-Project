@@ -59,7 +59,6 @@ jobs:
               "short_description": "Automated deployment demo via GitHub Actions",
               "description": "Deployment request generated automatically from GitHub multi-stage training pipeline.",
               "justification": "Self-learning demo for Change Velocity integration validation.",
-              "chg_md_validation": "false"
             }
           }
 
