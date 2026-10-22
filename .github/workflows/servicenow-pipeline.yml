@@ -1,0 +1,72 @@
+name: ServiceNow DevOps Pipeline
+
+on: [push]
+
+# Crucial for ServiceNow tracking to keep job IDs consistent
+jobs:
+
+  # STAGE 1: BUILD
+  Build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Compile and Package
+      run: |
+        echo "Compiling code..."
+        echo "Creating artifact package..."
+
+  # STAGE 2: TEST
+  Test:
+    runs-on: ubuntu-latest
+    needs: Build # Ensures Test only runs if Build succeeds
+    steps:
+    - name: Run Unit Tests
+      run: echo "Running unit tests... 100% passed."
+
+    - name: Run Security Scan
+      run: echo "Running SonarQube / Veracode security compliance scan..."
+
+  # STAGE 3: DEPLOY TO TEST/STAGE (ServiceNow tracks this as the change trigger)
+  DeployToStage:
+    runs-on: ubuntu-latest
+    needs: Test
+    steps:
+    - name: Deploy to Staging Environment
+      run: echo "Deploying code to non-production staging environment..."
+
+  # STAGE 4: SERVICENOW CHANGE GATE (The manual/automated approval step)
+  ServiceNowChangeGate:
+    runs-on: ubuntu-latest
+    needs: DeployToStage
+    steps:
+    - name: ServiceNow DevOps Change Action
+      # Using the official ServiceNow Marketplace Action
+      uses: ServiceNow/servicenow-devops-change@v4.0.0 
+      with:
+        # Credentials you would set up in your GitHub Secrets
+        devops-integration-token: ${{ secrets.SN_DEVOPS_TOKEN }}
+        instance-url: ${{ secrets.SN_INSTANCE_URL }}
+        tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
+        
+        # Details sent directly to ServiceNow to auto-populate the Change Ticket
+        change-request-details: |
+          {
+            "attributes": {
+              "short_description": "Automated deployment demo via GitHub Actions",
+              "description": "Deployment request generated automatically from GitHub multi-stage training pipeline.",
+              "justification": "Self-learning demo for Change Velocity integration validation.",
+              "chg_md_validation": "false"
+            }
+          }
+
+  # STAGE 5: PRODUCTION DEPLOYMENT
+  DeployToProduction:
+    runs-on: ubuntu-latest
+    needs: ServiceNowChangeGate # Will NOT run until ServiceNow approves the step above
+    steps:
+    - name: Deploy to Live Prod Server
+      run: |
+        echo "ServiceNow approved! Deploying to Production..."
+        echo "Deployment complete and live."
