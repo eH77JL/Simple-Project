@@ -1,0 +1,19 @@
+name: Code Safety Check
+
+on: [push]
+
+jobs:
+  test-project:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Get project files
+      uses: actions/checkout@v4
+
+    - name: Check if index.html exists
+      run: |
+        if [ -f index.html ]; then
+          echo "Success: index.html is present in the project!"
+        else
+          echo "Error: index.html is missing!"
+          exit 1
+        fi
