@@ -76,7 +76,7 @@ jobs:
       run: |
         echo "Successfully tracked change request!"
         echo "Ticket Number: ${{ steps.create.outputs.change-request-number }}"
-        echo "Sys ID: ${{ steps.create.outputs.change-request-sys-id }}"ber }} and change-request-sys-id = ${{ steps.create.outputs.change-request-sys-id }} "
+        echo "Sys ID: ${{ steps.create.outputs.change-request-sys-id }}"
 
   # STAGE 5: PRODUCTION DEPLOYMENT
   DeployToProduction:
