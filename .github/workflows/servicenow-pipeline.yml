@@ -58,7 +58,7 @@ jobs:
           {
               "setCloseCode": "true",
               "attributes": {
-                  "short_description": "Automated Software Deployment 26 Oct 2026",
+                  "short_description": ${{ github.event.head_commit.message }},
                   "description": "Automated Software Deployment.",
                   "assignment_group": "a715cd759f2002002920bde8132e7018",
                   "implementation_plan": "Software update is tested and results can be found in Test Summaries Tab; When the change is approved the implementation happens automated by the CICD pipeline within the change planned start and end time window.",
