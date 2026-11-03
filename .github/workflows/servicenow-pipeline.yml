@@ -65,7 +65,8 @@ jobs:
                   "backout_plan": "When software fails in production, the previous software release will be re-deployed.",
                   "test_plan": "Testing if the software was successfully deployed",
                   "chg_model": "adffaa9e4370211072b7f6be5bb8f2ed",
-                  "devops_change": "true"
+                  "devops_change": "true",
+                  "business_service": ""
               }
           }
          # Deduct indentation so these properties align directly under "with:"
