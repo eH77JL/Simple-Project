@@ -49,9 +49,9 @@ jobs:
         context-github: ${{ toJSON(github) }}
         job-name: 'ServiceNowChangeGate'
         # Credentials you would set up in your GitHub Secrets
-        devops-integration-token: ${{ secrets.SN_DEVOPS_TOKEN }}
-        instance-url: ${{ secrets.SN_INSTANCE_URL }}
-        tool-id: ${{ secrets.SN_ORCHESTRATION_TOOL_ID }}
+        devops-integration-token: ${{ secrets.SN_PSP_DEVOPS_TOKEN }}
+        instance-url: ${{ secrets.SN_PSP_INSTANCE_URL }}
+        tool-id: ${{ secrets.SN_PSP_ORCHESTRATION_TOOL_ID }}
         
         # Details sent directly to ServiceNow to auto-populate the Change Ticket
         change-request: |
